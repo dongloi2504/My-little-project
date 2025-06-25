@@ -1,0 +1,122 @@
+[
+  {
+    "id": 9,
+    "code": "1234",
+    "name": "1234",
+    "image": "/uploads/1750835722336-sell-and-buy.png",
+    "category": "Văn Phòng Phẩm",
+    "price": null
+  },
+  {
+    "id": 10,
+    "code": "1234",
+    "name": "1234",
+    "image": "/uploads/1750835887766-stationery.png",
+    "category": "In ấn",
+    "price": 123
+  },
+  {
+    "id": 11,
+    "code": "21321",
+    "name": "213",
+    "image": "/uploads/resized-1750835903517-stationery.png",
+    "category": "Văn Phòng Phẩm",
+    "price": 123
+  },
+  {
+    "id": 12,
+    "code": "21312",
+    "name": "3213",
+    "image": "/uploads/1750855907677-stationery.png",
+    "category": "In ấn",
+    "price": 123
+  },
+  {
+    "id": 13,
+    "code": "2421421",
+    "name": "3213213",
+    "image": "/uploads/1750855922206-wrench.png",
+    "category": "In ấn",
+    "price": 521321
+  },
+  {
+    "id": 14,
+    "code": "124214",
+    "name": "124124",
+    "image": "/uploads/1750856159146-in-tem-dan-ly-.jpg",
+    "category": "In ấn",
+    "price": null
+  },
+  {
+    "id": 15,
+    "code": "1",
+    "name": "12412456",
+    "image": "/uploads/1750856168700-giay-in-anh-1-mat.jpg",
+    "category": "In ấn",
+    "price": 1
+  },
+  {
+    "id": 16,
+    "code": "2",
+    "name": "2",
+    "image": "/uploads/1750856177215-giay-in-anh-1-mat.jpg",
+    "category": "In ấn",
+    "price": 3
+  },
+  {
+    "id": 18,
+    "code": "5",
+    "name": "5",
+    "image": "/uploads/1750856192326-giay-in-anh-1-mat.jpg",
+    "category": "In ấn",
+    "price": null
+  },
+  {
+    "id": 19,
+    "code": "6",
+    "name": "6",
+    "image": "/uploads/1750856198078-giay-in-anh-1-mat.jpg",
+    "category": "In ấn",
+    "price": null
+  },
+  {
+    "id": 20,
+    "code": "7",
+    "name": "7",
+    "image": "/uploads/1750856206027-giay-in-anh-1-mat.jpg",
+    "category": "In ấn",
+    "price": null
+  },
+  {
+    "id": 21,
+    "code": "8",
+    "name": "8",
+    "image": "/uploads/1750856243730-giay-in-anh-1-mat.jpg",
+    "category": "In ấn",
+    "price": null
+  },
+  {
+    "id": 22,
+    "code": "1231255",
+    "name": "21355",
+    "image": "/uploads/1750857589617-giay-in-anh-1-mat.jpg",
+    "category": "In ấn",
+    "price": null
+  },
+  {
+    "id": 23,
+    "code": "12312",
+    "name": "2134",
+    "image": "/uploads/1750857613846-giay-in-anh-1-mat.jpg",
+    "category": "In ấn",
+    "price": null
+  },
+  {
+    "id": 24,
+    "code": "19",
+    "name": "19",
+    "image": "/uploads/1750857729154-giay-in-anh-1-mat.jpg",
+    "category": "In ấn",
+    "price": null
+  }
+]
