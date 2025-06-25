@@ -130,74 +130,125 @@ export default function ProductAdminPage() {
     };
 
     return (
-        <div className="p-6 font-sans max-w-6xl mx-auto">
-            <div className="mb-6 space-y-2">
-                <h1 className="text-5xl font-bold">Quản lý sản phẩm</h1>
-                <div className="flex justify-end gap-2">
-                    {selectedIds.length > 0 && (
-                        <button onClick={handleDeleteSelected} className="bg-red-500 text-white px-4 py-2 rounded">
-                            🗑 Xóa
+        <div className="p-6 font-sans max-w-7xl mx-auto">
+            <div className="mb-6">
+                <div className="flex justify-between items-center mb-4">
+                    <h1 className="text-4xl font-bold">📦 Quản lý sản phẩm</h1>
+                    <div className="flex gap-2">
+                        {selectedIds.length > 0 && (
+                            <button onClick={handleDeleteSelected} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
+                                🗑 Xóa
+                            </button>
+                        )}
+                        <button
+                            onClick={() => {
+                                setShowModal(true);
+                                setEditingProduct(null);
+                            }}
+                            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md"
+                        >
+                            + Thêm sản phẩm
                         </button>
-                    )}
-                    <button
-                        onClick={() => {
-                            setShowModal(true);
-                            setEditingProduct(null);
-                        }}
-                        className="bg-orange-500 text-white px-4 py-2 rounded"
-                    >
-                        + Thêm sản phẩm
+                    </div>
+                </div>
+
+                {/* Bộ lọc */}
+                <div className="bg-white rounded-lg shadow p-4 flex flex-col md:flex-row gap-4">
+                    <input type="text" placeholder="🔍 Tìm mã..." value={filterCode} onChange={(e) => setFilterCode(e.target.value)} className="border p-2 rounded-md flex-1" />
+                    <input type="text" placeholder="🔍 Tìm tên..." value={filterName} onChange={(e) => setFilterName(e.target.value)} className="border p-2 rounded-md flex-1" />
+                    <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className="border p-2 rounded-md flex-1">
+                        <option value="">-- Tất cả danh mục --</option>
+                        {categories.map((cat) => (
+                            <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                    </select>
+                    <button onClick={fetchFiltered} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
+                        🔍 Lọc
                     </button>
                 </div>
             </div>
 
-            {/* Filter */}
-            <div className="bg-white rounded shadow p-4 mb-6 flex flex-col md:flex-row gap-4 items-end">
-                <input type="text" placeholder="Tìm mã..." value={filterCode} onChange={(e) => setFilterCode(e.target.value)} className="border p-2 rounded" />
-                <input type="text" placeholder="Tìm tên..." value={filterName} onChange={(e) => setFilterName(e.target.value)} className="border p-2 rounded" />
-                <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className="border p-2 rounded">
-                    <option value="">-- Tất cả danh mục --</option>
-                    {categories.map((cat) => (
-                        <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                </select>
-                <button onClick={fetchFiltered} className="bg-blue-500 text-white px-4 py-2 rounded">🔍 Filter</button>
+            {/* Bảng */}
+            <div className="overflow-x-auto rounded-lg shadow bg-white">
+                <table className="w-full text-sm">
+                    <thead>
+                        <tr className="bg-gray-100 text-left text-sm">
+                            <th className="p-3"><input type="checkbox" checked={selectedIds.length === filtered.length && filtered.length > 0} onChange={(e) => setSelectedIds(e.target.checked ? filtered.map(p => p.id) : [])} /></th>
+                            <th className="p-3">Mã</th>
+                            <th className="p-3">Tên</th>
+                            <th className="p-3">Hình ảnh</th>
+                            <th className="p-3">Danh mục</th>
+                            <th className="p-3">Giá</th>
+                            <th className="p-3">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filtered.map((p) => (
+                            <tr key={p.id} className="border-t hover:bg-gray-50">
+                                <td className="p-3">
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedIds.includes(p.id)}
+                                        onChange={() =>
+                                            setSelectedIds((prev) =>
+                                                prev.includes(p.id)
+                                                    ? prev.filter((x) => x !== p.id)
+                                                    : [...prev, p.id]
+                                            )
+                                        }
+                                    />
+                                </td>
+
+                                <td className="p-3">{p.code}</td>
+
+                                {/* ✅ Tên - in đậm */}
+                                <td className="p-3 font-semibold">{p.name}</td>
+
+                                <td className="p-3">
+                                    {p.image && (
+                                        <img
+                                            src={`http://localhost:8080${p.image}`}
+                                            alt={p.name}
+                                            className="w-12 h-12 object-cover rounded-md"
+                                        />
+                                    )}
+                                </td>
+
+                                {/* ✅ Danh mục - in đậm */}
+                                <td className="p-3 font-semibold">{p.category}</td>
+
+                                <td className="p-3">
+                                    {p.price
+                                        ? <span className="text-green-600 font-medium">{`${p.price.toLocaleString()}₫`}</span>
+                                        : <span className="text-orange-500 font-medium">Liên hệ</span>}
+                                </td>
+
+                                <td className="p-3">
+                                    <button
+                                        onClick={() => {
+                                            setEditingProduct(p);
+                                            setNewProduct({ ...p });
+                                            setShowModal(true);
+                                        }}
+                                        className="text-blue-600 hover:underline"
+                                    >
+                                        ✏️ Sửa
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
 
-            {/* Table */}
-            <table className="w-full bg-white rounded shadow text-sm">
-                <thead>
-                    <tr className="bg-gray-100 text-left">
-                        <th className="p-2"><input type="checkbox" checked={selectedIds.length === filtered.length && filtered.length > 0} onChange={(e) => setSelectedIds(e.target.checked ? filtered.map(p => p.id) : [])} /></th>
-                        <th className="p-2">Mã</th>
-                        <th className="p-2">Tên</th>
-                        <th className="p-2">Hình ảnh</th>
-                        <th className="p-2">Danh mục</th>
-                        <th className="p-2">Giá</th>
-                        <th className="p-2">Hành động</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filtered.map((p) => (
-                        <tr key={p.id} className="border-t hover:bg-gray-50">
-                            <td className="p-2"><input type="checkbox" checked={selectedIds.includes(p.id)} onChange={() => setSelectedIds((prev) => prev.includes(p.id) ? prev.filter((x) => x !== p.id) : [...prev, p.id])} /></td>
-                            <td className="p-2">{p.code}</td>
-                            <td className="p-2">{p.name}</td>
-                            <td className="p-2">{p.image && (<img src={`http://localhost:8080${p.image}`} alt={p.name} className="w-16 h-12 object-cover" />)}</td>
-                            <td className="p-2">{p.category}</td>
-                            <td className="p-2">{p.price ? `${p.price.toLocaleString()}₫` : "Liên hệ"}</td>
-                            <td className="p-2">
-                                <button onClick={() => { setEditingProduct(p); setNewProduct({ ...p }); setShowModal(true); }} className="text-blue-500 hover:underline">✏️ Sửa</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            {/* Pagination */}
+            {/* Phân trang */}
             <div className="mt-6 flex justify-center gap-2">
                 {Array.from({ length: totalPages }, (_, i) => (
-                    <button key={i + 1} onClick={() => fetchProducts(i + 1)} className={`px-3 py-1 rounded border ${page === i + 1 ? "bg-orange-500 text-white" : "bg-white"}`}>
+                    <button
+                        key={i + 1}
+                        onClick={() => fetchProducts(i + 1)}
+                        className={`px-3 py-1 rounded border ${page === i + 1 ? "bg-orange-500 text-white" : "bg-white hover:bg-gray-100"}`}
+                    >
                         {i + 1}
                     </button>
                 ))}
@@ -206,7 +257,10 @@ export default function ProductAdminPage() {
             {/* Modal */}
             <ProductModal
                 show={showModal}
-                onClose={() => { setShowModal(false); setEditingProduct(null); }}
+                onClose={() => {
+                    setShowModal(false);
+                    setEditingProduct(null);
+                }}
                 onSave={handleSaveProduct}
                 newProduct={newProduct}
                 onChange={(e) => setNewProduct((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
