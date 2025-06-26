@@ -7,6 +7,7 @@ import PrintCashierPage from "./Pages/PrintCashierPage";
 import SupportServicePage from "./Pages/SupportServicePage";
 import AdminLogin from "./Authen/AdminLogin";
 import ProductAdminPage from "./Authen/ProductAdminPage";
+import SearchPage from "./Pages/SearchPage";
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
         <Route path="/ho-tro-khach-hang" element={<SupportServicePage />} />
         <Route path="/admin/login" element={<AdminLogin/>}/>
         <Route path="/admin/page" element={<ProductAdminPage/>}/>
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
     </Router>
   );
