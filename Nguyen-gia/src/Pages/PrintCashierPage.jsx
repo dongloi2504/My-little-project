@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TopBar from "../components/TopBar";
 import ProductGrid from "../components/ProductGrid";
+import API_URL from "../config";
 
 export default function PrintCashierPage() {
   const [products, setProducts] = useState([]);
-  const CATEGORY = "mua bán";
+  const CATEGORY = "Mua Bán";
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/products")
+    fetch(`${API_URL}/api/products`)
       .then((res) => res.json())
       .then((data) => {
         const productArray = Array.isArray(data) ? data : data.products || [];
@@ -20,31 +21,38 @@ export default function PrintCashierPage() {
         setProducts(filtered);
       })
       .catch((error) => {
-        console.error("Lỗi khi fetch sản phẩm:", error);
+        console.error("❌ Lỗi khi fetch sản phẩm:", error);
       });
   }, []);
 
+  const slug = CATEGORY.toLowerCase().replace(/\s+/g, "-");
 
   return (
     <div className="font-sans">
-      <div className="pt-[140px]">
-        <TopBar />
+      {/* Sticky TopBar */}
+      <TopBar />
 
-        {/* Breadcrumb navigation */}
+      <main>
+        {/* Breadcrumb */}
         <div className="text-sm text-gray-600 px-6 py-3">
           <Link
             to="/"
-            className="text-gray-600 hover:text-orange-500 hover:underline cursor-pointer transition-colors duration-200"
+            className="text-gray-600 hover:text-orange-500 hover:underline transition-colors duration-200"
           >
             Trang chủ
           </Link>
-          <span className="mx-1">&gt;</span>
-          <span className="text-orange-500 font-medium">{CATEGORY}</span>
+          <span className="mx-1">/</span>
+          <Link
+            to={`/${slug}`}
+            className="text-orange-500 font-medium hover:underline"
+          >
+            {CATEGORY}
+          </Link>
         </div>
 
         {/* Hiển thị danh sách sản phẩm */}
-        <ProductGrid products={products} repeatCount={4} />
-      </div>
+        <ProductGrid products={products} />
+      </main>
     </div>
   );
 }

@@ -1,23 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TopBar from "../components/TopBar";
-import { FaTools, FaPrint, FaLaptopMedical } from "react-icons/fa";
+import { FaTools, FaLaptopMedical } from "react-icons/fa";
 
 export default function SupportServicePage() {
   return (
     <div className="font-sans">
-      <div className="pt-[140px]">
-        <TopBar />
+      {/* Sticky TopBar */}
+      <TopBar />
 
+      <main>
         {/* Breadcrumb */}
         <div className="text-sm text-gray-600 px-6 py-3">
           <Link
             to="/"
-            className="text-gray-600 hover:text-orange-500 hover:underline cursor-pointer transition-colors duration-200"
+            className="text-gray-600 hover:text-orange-500 hover:underline transition-colors duration-200"
           >
             Trang chủ
           </Link>
-          <span className="mx-1">&gt;</span>
+          <span className="mx-1">/</span>
           <span className="text-orange-500 font-medium">Hỗ trợ kỹ thuật</span>
         </div>
 
@@ -59,9 +60,12 @@ export default function SupportServicePage() {
 
           {/* Thông tin liên hệ */}
           <div className="mt-10 bg-orange-50 border-l-4 border-orange-500 p-6 rounded">
-            <h3 className="text-lg font-semibold mb-2 text-orange-600">Liên hệ hỗ trợ:</h3>
+            <h3 className="text-lg font-semibold mb-2 text-orange-600">
+              Liên hệ hỗ trợ:
+            </h3>
             <p className="text-gray-800">
-              📞 Hotline/Zalo: <strong className="text-orange-600">0376.084.720</strong>
+              📞 Hotline/Zalo:{" "}
+              <strong className="text-orange-600">0376.084.720</strong>
             </p>
             <p className="text-gray-800">
               📧 Email:{" "}
@@ -74,7 +78,7 @@ export default function SupportServicePage() {
             </p>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

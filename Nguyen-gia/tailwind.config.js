@@ -8,6 +8,10 @@ export default {
     extend: {
       fontFamily: {
         lobster: ['Lobster', 'cursive'],
+        sans: ['Open Sans', 'sans-serif'],
+        bungeeShade: ['Bungee Shade', 'cursive'],
+        bungeeInline: ['"Bungee Inline"', 'cursive'],
+        bungeeSpice: ['"Bungee Spice"', 'cursive'],
       },
       animation: {
         'fade-in': 'fadeIn 0.2s ease-out',
