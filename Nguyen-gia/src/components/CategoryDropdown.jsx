@@ -42,7 +42,7 @@ export default function CategoryDropdown() {
 
       {/* Dropdown menu */}
       {showSubmenu && (
-        <div className="absolute top-[110%] left-0 w-80 bg-white rounded-xl shadow-xl p-4 z-50 animate-fade-in">
+        <div className="absolute top-full left-0 w-80 bg-white rounded-xl shadow-xl p-4 z-50 animate-fade-in">
           <ul className="space-y-3 text-sm">
             {menuItems.map((item) => {
               const isActive = location.pathname === item.to;
