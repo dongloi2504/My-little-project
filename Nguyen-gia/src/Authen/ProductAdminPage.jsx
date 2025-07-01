@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProductModal from "../components/ProductModal";
-import API_URL from "../config"; 
+import API_URL from "../config";
 
 export default function ProductAdminPage() {
   const [products, setProducts] = useState([]);
@@ -121,8 +121,7 @@ export default function ProductAdminPage() {
   };
 
   const handleDeleteSelected = async () => {
-    if (selectedIds.length === 0 || !window.confirm("Bạn có chắc muốn xóa?"))
-      return;
+    if (selectedIds.length === 0 || !window.confirm("Bạn có chắc muốn xóa?")) return;
 
     try {
       const res = await fetch(`${API_URL}/api/products/delete`, {
@@ -133,13 +132,15 @@ export default function ProductAdminPage() {
       const data = await res.json();
       if (!res.ok) return alert("❌ " + data.error);
 
-      setFiltered((prev) => prev.filter((p) => !selectedIds.includes(p.id)));
-      setProducts((prev) => prev.filter((p) => !selectedIds.includes(p.id)));
+      const nextPage = filtered.length - selectedIds.length === 0 && page > 1 ? page - 1 : page;
+
+      await fetchProducts(nextPage);
       setSelectedIds([]);
     } catch (err) {
       console.error("❌ Lỗi khi xóa:", err);
     }
   };
+
 
   return (
     <div className="p-6 font-sans max-w-7xl mx-auto">
@@ -299,11 +300,10 @@ export default function ProductAdminPage() {
           <button
             key={i + 1}
             onClick={() => fetchProducts(i + 1)}
-            className={`px-3 py-1 rounded border ${
-              page === i + 1
+            className={`px-3 py-1 rounded border ${page === i + 1
                 ? "bg-orange-500 text-white"
                 : "bg-white hover:bg-gray-100"
-            }`}
+              }`}
           >
             {i + 1}
           </button>

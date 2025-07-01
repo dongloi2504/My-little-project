@@ -1,21 +1,5 @@
 [
   {
-    "id": 9,
-    "code": "1234",
-    "name": "1234",
-    "image": "/uploads/1750835722336-sell-and-buy.png",
-    "category": "Văn Phòng Phẩm",
-    "price": null
-  },
-  {
-    "id": 10,
-    "code": "1234",
-    "name": "1234",
-    "image": "/uploads/1750835887766-stationery.png",
-    "category": "In ấn",
-    "price": 123
-  },
-  {
     "id": 11,
     "code": "21321",
     "name": "213",
